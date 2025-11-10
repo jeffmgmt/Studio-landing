@@ -1,151 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- ====== Meta ====== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>StudioGo — Music Studio Booking Platform</title>
-  <meta name="description" content="Find your sound. Book your space. Join the StudioGo waitlist." />
+  <title>StudioGo — Find Your Sound. Book Your Space.</title>
+  <meta name="description" content="StudioGo connects artists, producers, and engineers with verified recording spaces—making professional studio booking simple. Join the waitlist." />
+  <meta name="theme-color" content="#d4af37" />
 
+  <!-- ====== Social / SEO ====== -->
+  <meta property="og:title" content="StudioGo — Find Your Sound. Book Your Space." />
+  <meta property="og:description" content="Discover and book verified music studios near you. Join the StudioGo waitlist." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jeffmgmt.github.io/Studio-landing/" />
+
+  <!-- Inline OG image fallback (no external file needed) -->
+  <meta property="og:image" content="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='1200' height='630' fill='%23d4af37'/%3E%3Ctext x='600' y='340' text-anchor='middle' font-size='96' font-family='Arial' fill='%23111'%3EStudioGo%3C/text%3E%3C/svg%3E" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23d4af37'/%3E%3Ctext x='32' y='40' font-size='28' text-anchor='middle' fill='%23111'%3E%F0%9F%8E%B5%3C/text%3E%3C/svg%3E" />
+
+  <!-- ====== Styles ====== -->
   <style>
     :root{
-      --brand:#d4af37; --ink:#111; --muted:#666; --line:#eee; --bg:#fff; --card:#faf8f2;
-      --radius:14px;
+      --bg:#ffffff;--fg:#111;--muted:#666;--brand:#d4af37;--card:#faf8f2;--line:#eee;--ok:#0a7a3d;--err:#b00020;
+      --r:14px;--rs:10px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
-         color:var(--ink);background:var(--bg);line-height:1.6}
-    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--fg);line-height:1.6}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
 
-    header{border-bottom:1px solid var(--line)}
-    .header-wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:50}
+    .bar{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
     .brand{display:flex;gap:12px;align-items:center;font-weight:800;font-size:22px}
-    .brand-badge{width:36px;height:36px;border-radius:10px;background:var(--brand);
-      display:grid;place-items:center;color:var(--ink);font-weight:900}
-    .btn{background:var(--brand);color:var(--ink);border:0;padding:12px 18px;border-radius:10px;
-      font-weight:700;cursor:pointer;transition:transform .06s ease}
+    .badge{width:36px;height:36px;border-radius:10px;background:var(--brand);display:grid;place-items:center;color:#111;font-weight:900}
+    .btn{background:var(--brand);color:#111;border:0;padding:12px 18px;border-radius:var(--rs);font-weight:700;cursor:pointer;transition:transform .06s ease}
     .btn:active{transform:translateY(1px)}
     .btn[disabled]{opacity:.6;cursor:not-allowed}
 
-    .hero{padding:80px 0 30px;text-align:center}
-    .hero h1{font-size:42px;line-height:1.1;margin-bottom:14px}
-    .hero .lead{font-size:18px;color:#555;max-width:760px;margin:0 auto 28px}
+    .hero{padding:58px 0 18px;text-align:center}
+    .hero h1{font-size:42px;line-height:1.1;margin-bottom:12px}
+    .lead{font-size:18px;color:#555;max-width:760px;margin:0 auto 24px}
 
-    .waitlist{background:var(--card);border:1px solid var(--line);border-radius:16px;
-      padding:22px;max-width:700px;margin:0 auto 60px;text-align:left}
-    .waitlist h2{font-size:24px;margin-bottom:12px}
-    form{display:flex;gap:10px;margin-top:10px}
-    input[type="email"]{flex:1;border:1px solid #ddd;border-radius:10px;padding:14px 12px;font-size:16px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+    .wait{max-width:720px;margin:0 auto 60px}
+    .wait h2{font-size:24px;margin-bottom:6px}
+    form{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    input[type="email"]{flex:1;min-width:220px;border:1px solid #ddd;border-radius:var(--rs);padding:14px 12px;font-size:16px}
+    .msg{display:none;margin-top:10px;font-weight:600}
+    .msg.ok{color:var(--ok)}
+    .msg.err{color:var(--err)}
 
-    .msg{display:none;margin-top:12px;font-weight:600}
-    .msg.success{color:#0a7a3d}
-    .msg.error{color:#b00020}
-
-    .how{padding:40px 0 90px}
-    .how h3{text-align:center;font-size:28px;margin-bottom:20px}
-    .steps{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .card{border:1px solid var(--line);border-radius:var(--radius);padding:16px;background:#fff;
-      transition:transform .08s ease,box-shadow .15s ease}
-    .card:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.05)}
+    .how{padding:24px 0 90px}
+    .how h3{text-align:center;font-size:28px;margin-bottom:18px}
+    .steps{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+    .tile{border:1px solid var(--line);border-radius:var(--r);padding:16px;background:#fff;transition:transform .08s ease, box-shadow .15s ease}
+    .tile:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.05)}
     .num{width:36px;height:36px;border-radius:8px;background:#111;color:#fff;display:grid;place-items:center;font-weight:800;margin-bottom:10px}
 
-    footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);text-align:center;font-size:14px}
+    footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px;text-align:center}
+
+    /* AI Concierge */
+    .ai-fab{position:fixed;right:18px;bottom:18px;background:var(--brand);color:#111;border:0;border-radius:24px;padding:12px 14px;font-weight:700;box-shadow:0 10px 20px rgba(0,0,0,.12);cursor:pointer;z-index:60}
+    .ai-panel{display:none;position:fixed;right:18px;bottom:70px;width:min(360px,95vw);max-height:70vh;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.12);overflow:hidden;z-index:60}
+    .ai-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--line);font-weight:800}
+    .ai-body{padding:12px;display:flex;flex-direction:column;gap:10px}
+    .ai-log{height:300px;overflow:auto;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:14px;background:#fff}
+    .ai-row{margin:6px 0}
+    .ai-row.you{font-weight:600}
+    .ai-input{display:flex;gap:8px}
+    .ai-input input{flex:1;border:1px solid #ddd;border-radius:10px;padding:10px 12px}
+
+    /* Button spinner */
+    .btn.loading{position:relative}
+    .btn.loading::before{
+      content:'';position:absolute;left:10px;top:50%;transform:translateY(-50%);
+      width:16px;height:16px;border-radius:50%;border:2px solid rgba(0,0,0,.25);border-top-color:rgba(0,0,0,.9);animation:spin .8s linear infinite
+    }
+    @keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
+
+    @media (max-width:540px){.hero h1{font-size:34px}}
   </style>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"StudioGo","url":"https://jeffmgmt.github.io/Studio-landing/","logo":"https://jeffmgmt.github.io/Studio-landing/"}
+  </script>
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <div class="container header-wrap">
-      <div class="brand">
-        <div class="brand-badge">🎵</div>
-        <span>StudioGo</span>
+    <div class="wrap bar" role="navigation" aria-label="Top">
+      <div class="brand" aria-label="StudioGo brand">
+        <div class="badge" aria-hidden="true">🎵</div><span>StudioGo</span>
       </div>
-      <a class="btn" href="#waitlist">Join Waitlist</a>
+      <a class="btn" href="#wait">Join Waitlist</a>
     </div>
   </header>
 
-  <main>
-    <section class="hero container">
-      <h1>Find Your Sound. <br/>Book Your Space.</h1>
-      <p class="lead">StudioGo connects artists, producers, and engineers with verified recording spaces—making professional studio booking simple.</p>
-    </section>
+  <!-- Hero -->
+  <section class="hero wrap">
+    <h1>Find Your Sound.<br/>Book Your Space.</h1>
+    <p class="lead">StudioGo connects artists, producers, and engineers with verified recording spaces—making professional studio booking simple.</p>
+    <a class="btn" href="#wait" aria-label="Jump to waitlist">Get Early Access</a>
+  </section>
 
-    <section id="waitlist" class="waitlist container">
+  <!-- Waitlist -->
+  <section id="wait" class="wait wrap">
+    <div class="card">
       <h2>Join the StudioGo Waitlist</h2>
       <p>Be first to get access when we launch in your city.</p>
 
-      <form id="waitlist-form" novalidate>
-        <input id="email" type="email" placeholder="your@email.com" required />
-        <button id="joinBtn" class="btn" type="submit">Join Waitlist</button>
+      <form id="waitlist-form" novalidate autocomplete="on">
+        <label class="small" for="email" style="display:block;color:#777;margin:2px 0">Email</label>
+        <input id="email" name="email" type="email" inputmode="email" placeholder="your@email.com" required aria-required="true" />
+        <button id="joinBtn" class="btn" type="submit" aria-label="Join waitlist">Join Waitlist</button>
+        <!-- Honeypot -->
+        <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true" />
       </form>
 
-      <div id="successMsg" class="msg success">✅ You’re on the list! We’ll email you when we open.</div>
-      <div id="errorMsg" class="msg error">❌ Something went wrong. Please try again.</div>
-    </section>
+      <div id="ok"  class="msg ok"  role="status" aria-live="polite">✅ You’re on the list! We’ll email you when we open.</div>
+      <div id="dup" class="msg ok"  role="status" aria-live="polite">✅ You’re already on the list. We’ll be in touch!</div>
+      <div id="bad" class="msg err" role="alert"  aria-live="assertive">❌ Please enter a valid email.</div>
+      <div id="err" class="msg err" role="alert"  aria-live="assertive">❌ Something went wrong. Please try again.</div>
 
-    <section class="how container">
-      <h3>How It Works</h3>
-      <div class="steps">
-        <div class="card"><div class="num">1</div>Discover verified studios near you.</div>
-        <div class="card"><div class="num">2</div>Message owners, confirm availability, and book securely.</div>
-        <div class="card"><div class="num">3</div>Record, mix, and create—no friction.</div>
-      </div>
-    </section>
-  </main>
+      <p class="small" style="margin-top:10px;color:#777">
+        By joining, you agree to our Terms and Privacy Policy. We’ll only email about StudioGo and you can unsubscribe anytime.
+      </p>
+    </div>
+  </section>
 
+  <!-- How it Works -->
+  <section class="how wrap" aria-labelledby="how-title">
+    <h3 id="how-title">How It Works</h3>
+    <div class="steps" role="list">
+      <div class="tile" role="listitem"><div class="num" aria-hidden="true">1</div>Discover verified studios near you.</div>
+      <div class="tile" role="listitem"><div class="num" aria-hidden="true">2</div>Message owners, confirm availability, and book securely.</div>
+      <div class="tile" role="listitem"><div class="num" aria-hidden="true">3</div>Record, mix, and create—no friction.</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <div class="container">StudioGo by Toff King Studios LLC</div>
+    <div class="wrap">© <span id="year"></span> StudioGo by Toff King Studios LLC</div>
   </footer>
 
-  <!-- Supabase (v2) -->
+  <!-- AI Concierge -->
+  <button id="aiFab" class="ai-fab" aria-haspopup="dialog" aria-controls="aiPanel" aria-expanded="false">Ask StudioGo</button>
+  <div id="aiPanel" class="ai-panel" role="dialog" aria-modal="false" aria-labelledby="aiTitle">
+    <div class="ai-head">
+      <div id="aiTitle">StudioGo Concierge</div>
+      <button id="aiClose" class="btn" style="padding:6px 10px;border-radius:8px">Close</button>
+    </div>
+    <div class="ai-body">
+      <div id="aiLog" class="ai-log" aria-live="polite">
+        <div class="ai-row">👋 Hey! I can answer quick questions about launch and booking. Ask me anything.</div>
+      </div>
+      <div class="ai-input">
+        <input id="aiText" type="text" placeholder="Ask about launch, cities, pricing…" />
+        <button id="aiSend" class="btn" type="button">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libs -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+  <!-- App Logic -->
   <script>
-    // Project credentials (safe to expose: anon key)
+    // Small helpers
+    const $ = (sel) => document.querySelector(sel);
+    const show = (el) => el.style.display = 'block';
+    const hide = (el) => el.style.display = 'none';
+    const validEmail = (v) => /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(v);
+    $('#year').textContent = new Date().getFullYear();
+
+    // ---- Supabase config (YOUR project; anon key is safe) ----
     const SUPABASE_URL = 'https://wagmbxguxorgirznryut.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhZ21ieGd1eG9yZ2lyem5yeXV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NDk3MDcsImV4cCI6MjA3ODMyNTcwN30.qFr9-LKX7LavxnRJFXnY5YT69-3JsAIdZcLV4SwCapA';
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // UI refs
-    const form = document.getElementById('waitlist-form');
-    const emailInput = document.getElementById('email');
-    const joinBtn = document.getElementById('joinBtn');
-    const successMsg = document.getElementById('successMsg');
-    const errorMsg = document.getElementById('errorMsg');
+    // ---- Waitlist form ----
+    const form = $('#waitlist-form');
+    const emailEl = $('#email');
+    const joinBtn = $('#joinBtn');
+    const ok = $('#ok'), dup = $('#dup'), bad = $('#bad'), err = $('#err');
 
-    // helpers
-    const show = (el, text) => { if (text) el.textContent = text; el.style.display = 'block'; };
-    const hide = (el) => { el.style.display = 'none'; };
-    const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    function clearMsgs(){ [ok, dup, bad, err].forEach(hide); }
 
-    // submit
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      hide(successMsg); hide(errorMsg);
+      clearMsgs();
 
-      const email = (emailInput.value || '').trim();
-      if (!validEmail(email)) return show(errorMsg, '❌ Please enter a valid email.');
+      // bot honeypot
+      const hp = document.getElementById('company');
+      if (hp && hp.value) { show(err); return; }
 
-      joinBtn.disabled = true;
+      const email = (emailEl.value || '').trim().toLowerCase();
+      if (!validEmail(email)) { show(bad); return; }
+
+      joinBtn.classList.add('loading'); joinBtn.disabled = true;
 
       try {
+        // upsert avoids duplicates (with unique constraint in DB)
         const { error } = await sb
-          .from('waitinglist_subscribers')     // table name
-          .insert([{ email }]);                // column name (lowercase)
+          .from('waitinglist_subscribers')
+          .upsert({ email })
+          .select('id');
 
         if (error) {
-          if (String(error.code) === '23505') {
-            show(successMsg, '✅ You’re already on the list. We’ll be in touch!');
-          } else {
-            show(errorMsg, `❌ ${error.message}`);
-          }
+          if ((error.code || '') === '23505') show(dup);
+          else { err.textContent = '❌ ' + (error.message || 'Something went wrong.'); show(err); }
         } else {
-          show(successMsg, '✅ You’re on the list! We’ll email you when we open.');
-          emailInput.value = '';
+          show(ok);
+          localStorage.setItem('studiogo_email', email);
+          emailEl.value = '';
         }
       } catch {
-        show(errorMsg, '❌ Network error. Please try again.');
+        show(err);
       } finally {
-        joinBtn.disabled = false;
+        joinBtn.classList.remove('loading'); joinBtn.disabled = false;
       }
     });
+
+    // ---- AI Concierge (calls Edge Function; safe fallback if not deployed) ----
+    const aiFab = $('#aiFab'), aiPanel = $('#aiPanel'), aiClose = $('#aiClose');
+    const aiLog = $('#aiLog'), aiText = $('#aiText'), aiSend = $('#aiSend');
+
+    function toggleAI(open){
+      aiPanel.style.display = open ? 'block' : 'none';
+      aiFab.setAttribute('aria-expanded', String(open));
+      if (open) aiText.focus();
+    }
+    aiFab.addEventListener('click', ()=>toggleAI(true));
+    aiClose.addEventListener('click', ()=>toggleAI(false));
+
+    function addRow(prefix, text, you=false){
+      const row = document.createElement('div');
+      row.className = 'ai-row' + (you ? ' you' : '');
+      row.textContent = (you ? 'You: ' : 'StudioGo: ') + text;
+      aiLog.appendChild(row);
+      aiLog.scrollTop = aiLog.scrollHeight;
+    }
+
+    async function callAI(message){
+      try{
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/ai-concierge`, {
+          method:'POST',
+          headers:{ 'Content-Type':'application/json', 'apikey': SUPABASE_ANON_KEY },
+          body: JSON.stringify({ message })
+        });
+        if (!res.ok) throw new Error('not ready');
+        const data = await res.json();
+        return (data && data.reply) ? data.reply : 'We’ll share more at launch. Anything else you’d like to know?';
+      }catch{
+        return 'Our AI concierge is warming up. Join the waitlist and we’ll ping you as soon as it’s fully live.';
+      }
+    }
+
+    async function sendAI(){
+      const q = (aiText.value || '').trim();
+      if (!q) return;
+      aiText.value = '';
+      addRow('You', q, true);
+      addRow('StudioGo', '…thinking');
+      const reply = await callAI(q);
+      const last = aiLog.querySelector('.ai-row:last-child');
+      if (last && last.textContent.startsWith('StudioGo: …thinking')) last.remove();
+      addRow('StudioGo', reply);
+    }
+    aiSend.addEventListener('click', sendAI);
+    aiText.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); sendAI(); }});
   </script>
+
+  <!--
+  ADMIN NOTES (for future devs)
+  - Table: public.waitinglist_subscribers (email TEXT UNIQUE NOT NULL, created_at TIMESTAMPTZ DEFAULT now(), id UUID PK DEFAULT gen_random_uuid()).
+  - RLS: enabled. Policy: INSERT for role anon with check (true).
+  - Edge Function: ai-concierge; server-only OPENAI_API_KEY secret.
+  - Never expose service keys client-side.
+  -->
 </body>
 </html>
