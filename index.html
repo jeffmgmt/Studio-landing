@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StudioGo - Find your sound. Book your space. Connect with verified music studios near you.">
+    <title>StudioGo - Music Studio Booking Platform</title>
+    <style>
+        /* ========================================
+           GLOBAL STYLES
+        ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========================================
+           HEADER & NAVIGATION
+        ======================================== */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #e5e5e5;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #d4af37 0%, #c9a229 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .cta-button {
+            background: #d4af37;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cta-button:hover {
+            background: #c9a229;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+        }
+
+        /* ========================================
+           HERO SECTION
+        ======================================== */
+        .hero {
+            padding: 120px 0 100px;
+            text-align: center;
+            background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+        }
+
+        .hero h1 {
+            font-size: 58px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .tagline {
+            font-size: 26px;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-description {
+            font-size: 19px;
+            color: #555;
+            max-width: 650px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           HOW IT WORKS SECTION
+        ======================================== */
+        .how-it-works {
+            padding: 90px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #1a1a1a;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #d4af37 0%, #c9a229 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 auto 24px;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .step h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           FEATURES SECTION (FOR OWNERS & ARTISTS)
+        ======================================== */
+        .features-section {
+            padding: 90px 0;
+            background: #fafafa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 45px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #d4af37 0%, #c9a229 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 26px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 17px;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 24px;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            color: #555;
+            font-size: 16px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        /* ========================================
+           WAITLIST SECTION
+        ======================================== */
+        .waitlist-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .waitlist-section h2 {
+            font-size: 44px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .waitlist-section p {
+            font-size: 19px;
+            margin-bottom: 50px;
+            color: #d1d1d1;
+        }
+
+        /* FORM STYLING - Easy to connect to Mailchimp or Formspree */
+        .waitlist-form {
+            max-width: 550px;
+            margin: 0 auto;
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .email-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 18px 24px;
+            border: 2px solid #3d3d3d;
+            border-radius: 10px;
+            font-size: 17px;
+            background: #2d2d2d;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: #d4af37;
+            background: #1a1a1a;
+        }
+
+        .email-input::placeholder {
+            color: #888;
+        }
+
+        .submit-button {
+            padding: 18px 45px;
+            background: #d4af37;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: #c9a229;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+        }
+
+        .success-message {
+            margin-top: 24px;
+            padding: 16px;
+            background: #10b981;
+            border-radius: 10px;
+            display: none;
+            font-weight: 500;
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        footer {
+            padding: 50px 0;
+            background: #1a1a1a;
+            color: #888;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .footer-links {
+            margin-top: 24px;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            margin: 0 18px;
+            transition: color 0.3s ease;
+            font-size: 15px;
+        }
+
+        .footer-links a:hover {
+            color: #d4af37;
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+        ======================================== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .tagline {
+                font-size: 20px;
+            }
+
+            .section-title {
+                font-size: 34px;
+            }
+
+            .waitlist-form {
+                flex-direction: column;
+            }
+
+            .email-input {
+                min-width: 100%;
+            }
+
+            .feature-card {
+                padding: 30px;
+            }
+
+            .steps {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         HEADER NAVIGATION
+         EDIT: Logo text and button text
+    ======================================== -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <div class="logo-icon">🎵</div>
+                    <!-- EDIT: App name below -->
+                    <span>StudioGo</span>
+                </a>
+                <!-- EDIT: Header button text below -->
+                <a href="#waitlist" class="cta-button">Join Waitlist</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================
+         HERO SECTION
+         EDIT: Headline, tagline, and description
+    ======================================== -->
+    <section class="hero">
+        <div class="container">
+            <!-- EDIT: Main headline below -->
+            <h1>Find Your Sound.<br>Book Your Space.</h1>
+            
+            <!-- EDIT: Tagline below -->
+            <p class="tagline">The easiest way to discover and book music studios near you</p>
+            
+            <!-- EDIT: Hero description below -->
+            <p class="hero-description">
+                StudioGo connects artists, producers, and engineers with verified recording spaces—making professional studio booking as simple as a few clicks.
+            </p>
+            
+            <!-- EDIT: Hero button text below -->
+            <a href="#waitlist" class="cta-button">Get Early Access</a>
+        </div>
+    </section>
+
+    <!-- ========================================
+         HOW IT WORKS SECTION
+         EDIT: Section title and 3 steps
+    ======================================== -->
+    <section class="how-it-works">
+        <div class="container">
+            <!-- EDIT: Section title below -->
+            <h2 class="section-title">How It Works</h2>
+            
+            <div class="steps">
+                <!-- STEP 1 - EDIT: Title and description below -->
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Search</h3>
+                    <p>Find studios by location, price, and amenities within a 25-mile radius of you.</p>
+                </div>
+                
+                <!-- STEP 2 - EDIT: Title and description below -->
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Connect</h3>
+                    <p>Message studio owners directly through our secure in-app messaging system.</p>
+                </div>
+                
+                <!-- STEP 3 - EDIT: Title and description below -->
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Book</h3>
+                    <p>Pay a deposit to unlock contact info and coordinate your session directly with the owner.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FEATURES SECTION
+         For Studio Owners & For Artists
+         EDIT: Card titles, descriptions, and bullet points
+    ======================================== -->
+    <section class="features-section">
+        <div class="container">
+            <!-- EDIT: Section title below -->
+            <h2 class="section-title">Built for the Music Community</h2>
+            
+            <div class="features-grid">
+                
+                <!-- FOR STUDIO OWNERS CARD -->
+                <div class="feature-card">
+                    <!-- EDIT: Icon emoji below -->
+                    <div class="feature-icon">🏢</div>
+                    
+                    <!-- EDIT: Card title below -->
+                    <h3>For Studio Owners</h3>
+                    
+                    <!-- EDIT: Card description below -->
+                    <p>Turn your downtime into income. List your space and get discovered by artists ready to book.</p>
+                    
+                    <!-- EDIT: Feature bullet points below -->
+                    <ul class="feature-list">
+                        <li>Create a professional studio profile</li>
+                        <li>Set your own hourly rates</li>
+                        <li>Manage bookings from one dashboard</li>
+                        <li>Secure payments with deposit system</li>
+                        <li>Only $1.99/month to list your studio</li>
+                    </ul>
+                </div>
+
+                <!-- FOR ARTISTS CARD -->
+                <div class="feature-card">
+                    <!-- EDIT: Icon emoji below -->
+                    <div class="feature-icon">🎤</div>
+                    
+                    <!-- EDIT: Card title below -->
+                    <h3>For Artists</h3>
+                    
+                    <!-- EDIT: Card description below -->
+                    <p>Stop hunting for studios on social media. Find verified spaces near you in seconds.</p>
+                    
+                    <!-- EDIT: Feature bullet points below -->
+                    <ul class="feature-list">
+                        <li>Search by location and price</li>
+                        <li>View photos and equipment lists</li>
+                        <li>Message owners before booking</li>
+                        <li>Secure deposit unlocks contact info</li>
+                        <li>Rate and review after your session</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         WAITLIST SECTION WITH EMAIL FORM
+         EDIT: Section title and description
+         FORM SETUP: See instructions below
+    ======================================== -->
+    <section class="waitlist-section" id="waitlist">
+        <div class="container">
+            <!-- EDIT: Waitlist section title below -->
+            <h2>Join the Waitlist for Early Access</h2>
+            
+            <!-- EDIT: Waitlist description below -->
+            <p>Be the first to know when StudioGo launches in your city.</p>
+            
+            <!-- 
+                ============================================
+                EMAIL FORM - SETUP INSTRUCTIONS
+                ============================================
+                
+                OPTION 1 - FORMSPREE (EASIEST, FREE):
+                1. Go to https://formspree.io and sign up (free)
+                2. Create a new form
+                3. Copy your form endpoint (looks like: https://formspree.io/f/xyzabc123)
+                4. Replace "YOUR_FORM_ID" below with your actual ID
+                5. Example: action="https://formspree.io/f/xyzabc123"
+                
+                OPTION 2 - MAILCHIMP:
+                1. Log into Mailchimp
+                2. Go to: Audience > Signup forms > Embedded forms
+                3. Copy the form action URL from the code
+                4. Replace the entire action URL below with Mailchimp's URL
+                5. Change method to "post" if needed
+                
+                NOTE: Until you add a form service, the form will show a 
+                success message but won't actually send emails.
+            -->
+            <form 
+                class="waitlist-form" 
+                id="waitlistForm" 
+                action="https://formspree.io/f/YOUR_FORM_ID" 
+                method="POST"
+            >
+                <!-- EDIT: Email input placeholder text below -->
+                <input 
+                    type="email" 
+                    name="email"
+                    class="email-input" 
+                    placeholder="Enter your email address" 
+                    required
+                    id="emailInput"
+                >
+                
+                <!-- EDIT: Submit button text below -->
+                <button type="submit" class="submit-button">Join Waitlist</button>
+            </form>
+            
+            <!-- Success message (shown after submission) -->
+            <div class="success-message" id="successMessage">
+                ✓ Thanks for joining! We'll notify you when StudioGo launches.
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         EDIT: Company info, location, and links
+    ======================================== -->
+    <footer>
+        <div class="container">
+            <!-- EDIT: Company name below -->
+            <p><strong>StudioGo</strong> by Toff King Studios LLC</p>
+            
+            <!-- EDIT: Location below -->
+            <p>Based in Atlanta, GA</p>
+            
+            <!-- EDIT: Footer links below (add real URLs when ready) -->
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="mailto:info@studiogo.com">Contact</a> <!-- EDIT: Add your email here -->
+            </div>
+            
+            <!-- EDIT: Copyright year and company name below -->
+            <p style="margin-top: 24px; font-size: 14px;">© 2025 Toff King Studios LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ========================================
+         JAVASCRIPT
+         Form handling and smooth scroll
+         No need to edit
