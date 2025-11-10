@@ -219,6 +219,32 @@
         alert('Network error. Please try again later.');
       }
     });
-  </script>
+  </script></
+
+    <!-- Supabase connection -->
+    <script src="https://unpkg.com/@supabase/supabase-js"></script>
+    <script>
+      const SUPABASE_URL = 'https://wagmbxguxorgirznryut.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhZ21ieGd1eG9yZ2lyem5yeXV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NDk3MDcsImV4cCI6MjA3ODMyNTcwN30.qFr9-LKX7LavxnRJFXnY5YT69-3JsAIdZcLV4SwCapA';
+      const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      document.querySelector('#waitlist-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.querySelector('#email').value;
+
+        const { error } = await supabase
+          .from('Waitinglist_subscribers')
+          .insert([{ Email: email }]);
+
+        if (error) {
+          alert('❌ Something went wrong: ' + error.message);
+        } else {
+          alert('✅ You’ve been added to the waitlist!');
+          document.querySelector('#email').value = '';
+        }
+      });
+    </script>
+  
+
 </body>
 </html>
