@@ -3,248 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="StudioGo — Find your sound. Book your space. Connect with verified music studios near you." />
   <title>StudioGo — Music Studio Booking Platform</title>
+  <meta name="description" content="Find your sound. Book your space. Join the StudioGo waitlist." />
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Roboto',sans-serif;line-height:1.6;color:#1a1a1a;background:#fff}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
-    header{padding:20px 0;border-bottom:1px solid #e5e5e5;background:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.05)}
-    .header-content{display:flex;justify-content:space-between;align-items:center}
-    .logo{display:flex;align-items:center;gap:12px;font-size:28px;font-weight:700;color:#1a1a1a;text-decoration:none}
-    .logo-icon{width:40px;height:40px;background:linear-gradient(135deg,#d4af37 0%,#c9a229 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px}
-    .cta-button{background:#d4af37;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;transition:.3s;border:none;cursor:pointer;font-size:16px}
-    .cta-button:hover{background:#c9a229;transform:translateY(-2px);box-shadow:0 4px 8px rgba(212,175,55,.3)}
-    .hero{padding:120px 0 100px;text-align:center;background:linear-gradient(180deg,#fafafa 0%,#ffffff 100%)}
-    .hero h1{font-size:58px;font-weight:800;margin-bottom:24px;color:#1a1a1a;line-height:1.2}
-    .tagline{font-size:26px;color:#666;margin-bottom:40px;font-weight:300;letter-spacing:.5px}
-    .hero-description{font-size:19px;color:#555;max-width:650px;margin:0 auto 50px;line-height:1.7}
-    .how-it-works{padding:90px 0;background:#fff}
-    .section-title{text-align:center;font-size:44px;font-weight:700;margin-bottom:60px;color:#1a1a1a}
-    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:50px;margin-top:50px}
-    .step{text-align:center;padding:30px 20px}
-    .step-number{width:70px;height:70px;background:linear-gradient(135deg,#d4af37 0%,#c9a229 100%);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;margin:0 auto 24px;box-shadow:0 4px 12px rgba(212,175,55,.3)}
-    .step h3{font-size:24px;margin-bottom:16px;color:#1a1a1a}
-    .step p{color:#666;font-size:17px;line-height:1.7}
-    .features-section{padding:90px 0;background:#fafafa}
-    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:50px;margin-top:60px}
-    .feature-card{background:#fff;padding:45px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:.3s}
-    .feature-card:hover{transform:translateY(-8px);box-shadow:0 12px 24px rgba(0,0,0,.15)}
-    .feature-icon{width:70px;height:70px;background:linear-gradient(135deg,#d4af37 0%,#c9a229 100%);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:24px}
-    .feature-card h3{font-size:26px;margin-bottom:16px;color:#1a1a1a}
-    .feature-card p{color:#666;font-size:17px;margin-bottom:24px;line-height:1.7}
-    .feature-list{list-style:none;margin-top:24px}
-    .feature-list li{padding:10px 0;color:#555;font-size:16px;position:relative;padding-left:30px}
-    .feature-list li:before{content:"✓";position:absolute;left:0;color:#d4af37;font-weight:700;font-size:18px}
-    .waitlist-section{padding:100px 0;background:linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 100%);color:#fff;text-align:center}
-    .waitlist-section h2{font-size:44px;margin-bottom:20px;font-weight:700}
-    .waitlist-section p{font-size:19px;margin-bottom:50px;color:#d1d1d1}
-    .waitlist-form{max-width:550px;margin:0 auto;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-    .email-input{flex:1;min-width:300px;padding:18px 24px;border:2px solid #3d3d3d;border-radius:10px;font-size:17px;background:#2d2d2d;color:#fff;transition:.3s}
-    .email-input:focus{outline:none;border-color:#d4af37;background:#1a1a1a}
-    .email-input::placeholder{color:#888}
-    .submit-button{padding:18px 45px;background:#d4af37;color:#fff;border:none;border-radius:10px;font-size:17px;font-weight:600;cursor:pointer;transition:.3s}
-    .submit-button:hover{background:#c9a229;transform:translateY(-2px);box-shadow:0 4px 12px rgba(212,175,55,.4)}
-    .success-message{margin-top:24px;padding:16px;background:#10b981;border-radius:10px;display:none;font-weight:500}
-    footer{padding:50px 0;background:#1a1a1a;color:#888;text-align:center}
-    footer p{margin-bottom:12px;font-size:15px}
-    .footer-links{margin-top:24px}
-    .footer-links a{color:#888;text-decoration:none;margin:0 18px;transition:color .3s ease;font-size:15px}
-    .footer-links a:hover{color:#d4af37}
-    @media (max-width:768px){
-      .hero h1{font-size:40px}
-      .tagline{font-size:20px}
-      .section-title{font-size:34px}
-      .waitlist-form{flex-direction:column}
-      .email-input{min-width:100%}
-      .feature-card{padding:30px}
-      .steps{gap:40px}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: #111; background: #fff; line-height: 1.6;
     }
-    @media (max-width:480px){
-      .hero{padding:80px 0 60px}
-      .hero h1{font-size:32px}
-      .logo{font-size:24px}
-      .cta-button{padding:10px 20px;font-size:14px}
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    header { border-bottom: 1px solid #eee; }
+    .header-wrap { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+    .brand { display: flex; gap: 12px; align-items: center; font-weight: 800; font-size: 22px; }
+    .brand-badge { width: 36px; height: 36px; border-radius: 10px; background: #d4af37; display: grid; place-items: center; color: #111; font-weight: 900; }
+    .btn {
+      background: #d4af37; color: #111; border: 0; padding: 12px 18px; border-radius: 10px;
+      font-weight: 700; cursor: pointer; transition: transform .06s ease;
     }
-    /* Optional: if you upload logo.png, uncomment the next rule
-    .logo-img{width:40px;height:40px;object-fit:cover;border-radius:8px}
-    */
+    .btn:active { transform: translateY(1px); }
+    .btn[disabled] { opacity: .6; cursor: not-allowed; }
+
+    .hero { padding: 80px 0 30px; text-align: center; }
+    .hero h1 { font-size: 42px; line-height: 1.1; margin-bottom: 14px; }
+    .hero p.lead { font-size: 18px; color: #555; max-width: 760px; margin: 0 auto 28px; }
+
+    .waitlist {
+      background: #faf8f2; border: 1px solid #eee; border-radius: 16px;
+      padding: 22px; max-width: 700px; margin: 0 auto 60px; text-align: left;
+    }
+    .waitlist h2 { font-size: 24px; margin-bottom: 12px; }
+    form { display: flex; gap: 10px; margin-top: 10px; }
+    input[type="email"] {
+      flex: 1; border: 1px solid #ddd; border-radius: 10px; padding: 14px 12px; font-size: 16px;
+    }
+
+    .msg { display: none; margin-top: 12px; font-weight: 600; }
+    .msg.success { color: #0a7a3d; }
+    .msg.error { color: #b00020; }
+
+    .how { padding: 40px 0 90px; }
+    .how h3 { text-align: center; font-size: 28px; margin-bottom: 20px; }
+    .steps { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card {
+      border: 1px solid #eee; border-radius: 14px; padding: 16px; background: #fff;
+      transition: transform .08s ease, box-shadow .15s ease; 
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,.05); }
+    .num { width: 36px; height: 36px; border-radius: 8px; background: #111; color: #fff; display: grid; place-items: center; font-weight: 800; margin-bottom: 10px; }
+
+    footer { border-top: 1px solid #eee; padding: 30px 0; color: #666; text-align: center; font-size: 14px; }
   </style>
 </head>
 <body>
-
   <header>
-    <div class="container">
-      <div class="header-content">
-        <a href="#" class="logo">
-          <div class="logo-icon">🎵</div>
-          <!-- If you upload logo.png, you can replace the icon with:
-          <img src="logo.png" alt="StudioGo" class="logo-img" />
-          -->
-          <span>StudioGo</span>
-        </a>
-        <a href="#waitlist" class="cta-button">Join Waitlist</a>
+    <div class="container header-wrap">
+      <div class="brand">
+        <div class="brand-badge">🎵</div>
+        <span>StudioGo</span>
       </div>
+      <a class="btn" href="#waitlist">Join Waitlist</a>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Find Your Sound.<br>Book Your Space.</h1>
-      <p class="tagline">The easiest way to discover and book music studios near you</p>
-      <p class="hero-description">
-        StudioGo connects artists, producers, and engineers with verified recording spaces—making professional studio booking as simple as a few clicks.
-      </p>
-      <a href="#waitlist" class="cta-button">Get Early Access</a>
-    </div>
-  </section>
+  <main>
+    <section class="hero container">
+      <h1>Find Your Sound. <br/>Book Your Space.</h1>
+      <p class="lead">StudioGo connects artists, producers, and engineers with verified recording spaces—making professional studio booking simple.</p>
+    </section>
 
-  <section class="how-it-works">
-    <div class="container">
-      <h2 class="section-title">How It Works</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>Search</h3>
-          <p>Find studios by location, price, and amenities within a 25-mile radius of you.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>Connect</h3>
-          <p>Message studio owners directly through our secure in-app messaging system.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>Book</h3>
-          <p>Pay a deposit to unlock contact info and coordinate your session directly with the owner.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section id="waitlist" class="waitlist container">
+      <h2>Join the StudioGo Waitlist</h2>
+      <p>Be first to get access when we launch in your city.</p>
 
-  <section class="features-section">
-    <div class="container">
-      <h2 class="section-title">Built for the Music Community</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🏢</div>
-          <h3>For Studio Owners</h3>
-          <p>Turn your downtime into income. List your space and get discovered by artists ready to book.</p>
-          <ul class="feature-list">
-            <li>Create a professional studio profile</li>
-            <li>Set your own hourly rates</li>
-            <li>Manage bookings from one dashboard</li>
-            <li>Secure payments with deposit system</li>
-            <li>Only $1.99/month to list your studio</li>
-          </ul>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">🎤</div>
-          <h3>For Artists</h3>
-          <p>Stop hunting for studios on social media. Find verified spaces near you in seconds.</p>
-          <ul class="feature-list">
-            <li>Search by location and price</li>
-            <li>View photos and equipment lists</li>
-            <li>Message owners before booking</li>
-            <li>Secure deposit unlocks contact info</li>
-            <li>Rate and review after your session</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="waitlist-section" id="waitlist">
-    <div class="container">
-      <h2>Join the Waitlist for Early Access</h2>
-      <p>Be the first to know when StudioGo launches in your city.</p>
-
-      <!-- Replace the action URL after you create your Formspree form -->
-      <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/XXXXX" method="POST">
-        <input type="hidden" name="_subject" value="New StudioGo Waitlist Signup" />
-        <input type="hidden" name="_honeypot" />
-        <input type="email" name="email" class="email-input" placeholder="Enter your email address" required id="emailInput" />
-        <button type="submit" class="submit-button">Join Waitlist</button>
+      <form id="waitlist-form" novalidate>
+        <input id="email" type="email" placeholder="your@email.com" required />
+        <button id="joinBtn" class="btn" type="submit">Join Waitlist</button>
       </form>
 
-      <div class="success-message" id="successMessage">
-        ✓ Thanks for joining! We'll notify you when StudioGo launches.
+      <div id="successMsg" class="msg success">✅ You’re on the list! We’ll email you when we open.</div>
+      <div id="errorMsg" class="msg error">❌ Something went wrong. Please try again.</div>
+    </section>
+
+    <section class="how container">
+      <h3>How It Works</h3>
+      <div class="steps">
+        <div class="card">
+          <div class="num">1</div>
+          Discover verified studios near you.
+        </div>
+        <div class="card">
+          <div class="num">2</div>
+          Message owners, confirm availability, and book securely.
+        </div>
+        <div class="card">
+          <div class="num">3</div>
+          Record, mix, and create—no friction.
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    <div class="container">
-      <p><strong>StudioGo</strong> by Toff King Studios LLC</p>
-      <p>Based in Atlanta, GA</p>
-      <div class="footer-links">
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#terms">Terms of Service</a>
-        <a href="mailto:jeffmgmt@toffkingstudios.com">Contact</a>
-      </div>
-      <p style="margin-top:24px;font-size:14px;">© 2025 Toff King Studios LLC. All rights reserved.</p>
-    </div>
+    <div class="container">StudioGo by Toff King Studios LLC</div>
   </footer>
 
+  <!-- Supabase (v2) -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script>
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const id=a.getAttribute('href');
-        if(id.length>1){
-          e.preventDefault();
-          document.querySelector(id).scrollIntoView({behavior:'smooth'});
-        }
-      });
-    });
+    // ---- Config (already filled with your project) ----
+    const SUPABASE_URL = 'https://wagmbxguxorgirznryut.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhZ21ieGd1eG9yZ2lyem5yeXV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NDk3MDcsImV4cCI6MjA3ODMyNTcwN30.qFr9-LKX7LavxnRJFXnY5YT69-3JsAIdZcLV4SwCapA';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Formspree AJAX submit (shows green success bar)
-    const form=document.getElementById('waitlistForm');
-    const success=document.getElementById('successMessage');
-    form.addEventListener('submit',async(e)=>{
+    // Elements
+    const form = document.getElementById('waitlist-form');
+    const emailInput = document.getElementById('email');
+    const joinBtn = document.getElementById('joinBtn');
+    const successMsg = document.getElementById('successMsg');
+    const errorMsg = document.getElementById('errorMsg');
+
+    // Helpers
+    const show = (el) => el.style.display = 'block';
+    const hide = (el) => el.style.display = 'none';
+    const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+    // Submit
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const endpoint=form.getAttribute('action'); // your Formspree URL
-      const data=new FormData(form);
-      try{
-        const res=await fetch(endpoint,{method:'POST',body:data,headers:{'Accept':'application/json'}});
-        if(res.ok){
-          success.style.display='block';
-          form.reset();
-        }else{
-          alert('Unable to submit right now. Please try again later.');
-        }
-      }catch(err){
-        alert('Network error. Please try again later.');
+      hide(successMsg); hide(errorMsg);
+
+      const email = emailInput.value.trim();
+      if (!validEmail(email)) {
+        errorMsg.textContent = '❌ Please enter a valid email.';
+        show(errorMsg);
+        return;
       }
-    });
-  </script></
 
-    <!-- Supabase connection -->
-    <script src="https://unpkg.com/@supabase/supabase-js"></script>
-    <script>
-      const SUPABASE_URL = 'https://wagmbxguxorgirznryut.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhZ21ieGd1eG9yZ2lyem5yeXV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI3NDk3MDcsImV4cCI6MjA3ODMyNTcwN30.qFr9-LKX7LavxnRJFXnY5YT69-3JsAIdZcLV4SwCapA';
-      const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      joinBtn.disabled = true;
 
-      document.querySelector('#waitlist-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.querySelector('#email').value;
-
-        const { error } = await supabase
-          .from('Waitinglist_subscribers')
-          .insert([{ Email: email }]);
+      try {
+        const { error } = await supabaseClient
+          .from('waitinglist_subscribers')        // <- table (lowercase)
+          .insert([{ Email: email }]);            // <- column names from your table
 
         if (error) {
-          alert('❌ Something went wrong: ' + error.message);
+          // 23505 = unique_violation (email already in table)
+          if ((error.code || '').toString() === '23505') {
+            successMsg.textContent = '✅ You’re already on the list. We’ll be in touch!';
+            show(successMsg);
+          } else {
+            errorMsg.textContent = '❌ ' + error.message;
+            show(errorMsg);
+          }
         } else {
-          alert('✅ You’ve been added to the waitlist!');
-          document.querySelector('#email').value = '';
+          successMsg.textContent = '✅ You’re on the list! We’ll email you when we open.';
+          show(successMsg);
+          emailInput.value = '';
         }
-      });
-    </script>
-  
-
+      } catch (err) {
+        errorMsg.textContent = '❌ Network error. Please try again.';
+        show(errorMsg);
+      } finally {
+        joinBtn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
